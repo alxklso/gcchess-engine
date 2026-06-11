@@ -31,6 +31,6 @@ typedef struct
     uint64_t whiteBishops;
     uint64_t whitePawns;
 
-} BoardState;
+} Board;
 
 #endif
