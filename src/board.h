@@ -2,6 +2,7 @@
 #define BOARD_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 /*
     For tracking all pieces' positions (board state) at any given time.
@@ -13,9 +14,14 @@
     E.g. Black pawns starting position would be 
 */
 
+enum Side
+{
+    BLACK = 0,
+    WHITE = 1,
+};
+
 typedef struct
 {
-    /* Black pieces */
     uint64_t blackKing;
     uint64_t blackQueen;
     uint64_t blackRooks;
@@ -23,13 +29,17 @@ typedef struct
     uint64_t blackBishops;
     uint64_t blackPawns;
 
-    /* White pieces */
     uint64_t whiteKing;
     uint64_t whiteQueen;
     uint64_t whiteRooks;
     uint64_t whiteKnights;
     uint64_t whiteBishops;
     uint64_t whitePawns;
+
+    int who2move;
+
+    /* Control var for game loop (TODO: implement stalemates and resignations). */
+    bool checkmate;
 
 } Board;
 

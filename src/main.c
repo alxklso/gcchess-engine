@@ -7,7 +7,7 @@
 /**
  * @brief Initializes the board object that will be used throughout the game.
  * 
- * @param None
+ * @param None.
  * 
  * @return Pointer to the board object.
  */
@@ -17,7 +17,6 @@ Board* initBoard(void)
 
     if (newBoard != NULL)
     {
-        /* Initialize the piece positions. */
         newBoard->blackKing = 1ULL << E8;
         newBoard->blackQueen = 1ULL << D8;
         newBoard->blackRooks = (1ULL << A8) | (1ULL << H8);
@@ -31,27 +30,60 @@ Board* initBoard(void)
         newBoard->whiteKnights = (1ULL << B1) | (1ULL << G1);
         newBoard->whiteBishops = (1ULL << C1) | (1ULL << F1);
         newBoard->whitePawns = 0xFFULL << A2;
+
+        newBoard->who2move = WHITE;
+        newBoard->checkmate = false;
     }
 
     return newBoard;
+}
+
+
+/**
+ * @brief Main game loop. Runs until checkmate is detected.
+ * 
+ * @param board: Pointer to board object
+ * 
+ * @return None.
+ */
+void runGame(Board* board)
+{
+    while (!board->checkmate)
+    {
+
+        if (board->who2move == WHITE)
+        {
+            /* Calculate pseudo-legal moves for white side. */
+
+            board->who2move = BLACK;
+        }
+        else
+        {
+            /* Calculate pseudo-legal moves for black side. */
+
+            board->who2move = WHITE;
+        }
+
+    }
 }
 
 int main(void)
 {
     printf("Welcome to gcchess-engine!\n");
 
-    /* Initialize board. */
     printf("Initializing board...\n");
+    Board* board = initBoard();
 
-    Board* BoardState = initBoard();
-
-    if (BoardState == NULL)
+    if (board == NULL)
     {
         fprintf(stderr, "Failed to initialize the board. Exiting...\n");
         return EXIT_FAILURE;
     }
 
     printf("Board initialized.\n");
+
+    printf("Running the game...\n");
+    runGame(board);
 
     return EXIT_SUCCESS;
 }
