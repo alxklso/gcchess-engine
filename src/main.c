@@ -17,7 +17,6 @@ Board* initBoard(void)
 
     if (newBoard != NULL)
     {
-        /* Initialize the piece positions. */
         newBoard->blackKing = 1ULL << E8;
         newBoard->blackQueen = 1ULL << D8;
         newBoard->blackRooks = (1ULL << A8) | (1ULL << H8);
@@ -36,11 +35,23 @@ Board* initBoard(void)
     return newBoard;
 }
 
+/**
+ * @brief Print the composite board state representation to stdout.
+ * 
+ * @param Pointer to the board object.
+ * 
+ * @return None.
+ */
+void printBoardState(Board* board)
+{
+    // TODO
+
+    return;
+}
+
 int main(void)
 {
     printf("Welcome to gcchess-engine!\n");
-
-    /* Initialize board. */
     printf("Initializing board...\n");
 
     Board* BoardState = initBoard();
